@@ -7,83 +7,66 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-}
-
-.container {
-    width: 100%;
-    max-width: 600px;
-    background: #fff;
+  }
+  
+  .container {
+    background-color: white;
     border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 400px;
     padding: 20px;
+  }
+  
+  h1 {
     text-align: center;
-}
-
-h1 {
-    font-size: 24px;
-    margin-bottom: 20px;
-}
-
-#chat-box {
-    display: flex;
-    flex-direction: column;
-    height: 500px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    overflow: hidden;
-    position: relative;
-}
-
-#messages {
-    flex: 1;
+    color: #333;
+  }
+  
+  #chat-window {
+    height: 300px;
     overflow-y: auto;
+    border: 1px solid #ccc;
+    border-radius: 8px;
     padding: 10px;
-    background: #f9f9f9;
-}
-
-#messages div {
     margin-bottom: 10px;
-}
-
-.user {
+    background-color: #fafafa;
+  }
+  
+  #chat-window .message {
+    margin: 5px 0;
+  }
+  
+  #chat-window .user {
     text-align: right;
-    color: #007BFF;
-}
-
-.bot {
+    color: blue;
+  }
+  
+  #chat-window .bot {
     text-align: left;
-    color: #28a745;
-}
-
-#error {
-    color: red;
-    text-align: center;
-}
-
-#chat-form {
+    color: green;
+  }
+  
+  #chat-form {
     display: flex;
-    border-top: 1px solid #ddd;
-    background: #fff;
-    padding: 10px;
-}
-
-#chat-form input {
+  }
+  
+  #user-input {
     flex: 1;
     padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    margin-right: 10px;
-}
-
-#chat-form button {
-    background-color: #007BFF;
-    color: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+  }
+  
+  button {
+    padding: 10px;
     border: none;
-    border-radius: 4px;
-    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 8px;
     cursor: pointer;
-}
-
-#chat-form button:hover {
-    background-color: #0056b3;
-}
+  }
+  
+  button:hover {
+    background-color: #45a049;
+  }
+  

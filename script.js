@@ -1,51 +1,46 @@
-const apiUrl = "https://api.mistral.com/agents/ag:7d92a333:20241202:course-tah-les-fous:0593db55/messages"; // API de l'agent
-const apiKey = "Y8sCvkCxYvVwmmGWknNvUgE3jaEuYvJ5"; // Remplacez par votre clé API
-
-// Références aux éléments HTML
-const chatForm = document.getElementById("chat-form");
-const userMessageInput = document.getElementById("user-message");
-const messagesDiv = document.getElementById("messages");
-
-// Fonction pour afficher un message
-function addMessage(author, text, className = "") {
-    const messageDiv = document.createElement("div");
-    messageDiv.textContent = `${author}: ${text}`;
-    messageDiv.className = className;
-    messagesDiv.appendChild(messageDiv);
-    messagesDiv.scrollTop = messagesDiv.scrollHeight; // Scroll automatique
-}
-
-// Gérer l'envoi du message
-chatForm.addEventListener("submit", async (event) => {
-    event.preventDefault();
-    const userMessage = userMessageInput.value.trim();
-    if (!userMessage) return;
-
-    // Ajouter le message de l'utilisateur
-    addMessage("Vous", userMessage, "user");
-
-    // Réinitialiser le champ de saisie
-    userMessageInput.value = "";
-
-    // Envoyer le message à l'agent Mistral
+document.getElementById("chat-form").addEventListener("submit", async function (e) {
+    e.preventDefault();
+  
+    const userInput = document.getElementById("user-input").value;
+    if (!userInput.trim()) return;
+  
+    // Display user message
+    addMessage("user", userInput);
+    document.getElementById("user-input").value = "";
+  
     try {
-        const response = await fetch(apiUrl, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${apiKey}`,
-            },
-            body: JSON.stringify({ message: userMessage }),
-        });
-
-        if (response.ok) {
-            const data = await response.json();
-            addMessage("Agent Mistral", data.reply || "Réponse indisponible", "bot");
-        } else {
-            addMessage("Erreur", "Impossible de contacter l'agent.", "error");
-        }
+      // Send message to the API
+      const response = await fetch("https://api.example.com/agent", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer Y8sCvkCxYvVwmmGWknNvUgE3jaEuYvJ5"
+        },
+        body: JSON.stringify({
+          agent_id: "ag:7d92a333:20241202:course-tah-les-fous:0593db55",
+          message: userInput
+        })
+      });
+  
+      const data = await response.json();
+  
+      if (data && data.reply) {
+        addMessage("bot", data.reply);
+      } else {
+        addMessage("bot", "Sorry, I didn't understand that.");
+      }
     } catch (error) {
-        console.error("Erreur :", error);
-        addMessage("Erreur", "Une erreur s'est produite.", "error");
+      console.error("Error communicating with the agent:", error);
+      addMessage("bot", "There was an error communicating with the agent.");
     }
-});
+  });
+  
+  function addMessage(sender, message) {
+    const chatWindow = document.getElementById("chat-window");
+    const messageElement = document.createElement("div");
+    messageElement.classList.add("message", sender);
+    messageElement.textContent = message;
+    chatWindow.appendChild(messageElement);
+    chatWindow.scrollTop = chatWindow.scrollHeight;
+  }
+  
