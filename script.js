@@ -1,5 +1,5 @@
 const apiUrl = "https://api.mistral.com/agents/ag:7d92a333:20241202:course-tah-les-fous:0593db55/messages"; // API de l'agent
-const apiKey = "VOTRE_CLE_API"; // Remplacez par votre clé API
+const apiKey = "Y8sCvkCxYvVwmmGWknNvUgE3jaEuYvJ5"; // Remplacez par votre clé API
 
 // Références aux éléments HTML
 const chatForm = document.getElementById("chat-form");
